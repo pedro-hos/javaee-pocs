@@ -1,4 +1,4 @@
-package br.com.pedrohos.stateless;
+package br.com.pedrohos.remote.stateless;
 
 /**
  * 

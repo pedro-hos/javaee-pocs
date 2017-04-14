@@ -1,4 +1,4 @@
-package br.com.pedrohos.stateless;
+package br.com.pedrohos.remote.stateless;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;

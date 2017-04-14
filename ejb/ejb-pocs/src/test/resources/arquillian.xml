@@ -29,7 +29,7 @@
 		<!-- By default, arquillian will use the JBOSS_HOME environment variable. 
 			Alternatively, the configuration below can be uncommented. -->
 		<configuration>
-			<property name="jbossHome">/opt/jboss/as/eap-7.0.0/</property>
+			<property name="jbossHome">/opt/jboss/as/wildfly-10.1.0.Final/</property>
 		</configuration>
 	</container>
 	
