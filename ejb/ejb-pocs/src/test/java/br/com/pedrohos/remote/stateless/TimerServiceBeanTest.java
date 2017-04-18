@@ -35,7 +35,9 @@ public class TimerServiceBeanTest {
 	
 	@Test
 	public void testGetTime() {
-		Assert.assertNotNull(service.getTime());
+		String time = service.getTime();
+		System.out.println(time);
+		Assert.assertNotNull(time);
 	}
 
 }

@@ -6,10 +6,13 @@ import java.time.format.DateTimeFormatter;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 
 import org.jboss.logging.Logger;
+
+import br.com.pedrohos.local.stateless.NiceDayService;
 
 /**
  * @author pedro-hos
@@ -20,6 +23,9 @@ import org.jboss.logging.Logger;
 public class TimerServiceBean implements TimerService {
 	
 	private final Logger logger = Logger.getLogger(TimerServiceBean.class);
+	
+	@EJB
+	private NiceDayService niceDay;
 	
 	@Resource
 	private SessionContext ctx;
@@ -32,7 +38,7 @@ public class TimerServiceBean implements TimerService {
 	@Override
 	public String getTime() {
 		logger.info(">>> " + ctx.getInvokedBusinessInterface());
-		return LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+		return LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")) + niceDay.getMessage();
 	}
 	
 	@PreDestroy
