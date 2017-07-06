@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-web>
+	<security-domain>jmx-console</security-domain>
+	<valve>
+		<class-name>org.jboss.as.web.security.ExtendedFormAuthenticator</class-name>
+	</valve>
+</jboss-web>

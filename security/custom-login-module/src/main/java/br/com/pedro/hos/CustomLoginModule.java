@@ -1,4 +1,4 @@
-package org.pedro.hos.jaas;
+package br.com.pedro.hos;
 
 import java.util.Map;
 
@@ -11,7 +11,7 @@ import javax.security.auth.callback.UnsupportedCallbackException;
 import javax.security.auth.login.LoginException;
 import javax.security.auth.spi.LoginModule;
 
-public class JAASLoginModule implements LoginModule {
+public class CustomLoginModule implements LoginModule {
 
 	Subject subject = null;
 	CallbackHandler callbackHandler = null;
@@ -21,15 +21,16 @@ public class JAASLoginModule implements LoginModule {
 	private String username;
 	private char[] password;
 	
-	@Override
 	public void initialize(Subject subject, CallbackHandler callbackHandler, Map<String, ?> sharedState, Map<String, ?> options) {
+		
+		System.out.println("initialize(...) ");
+		
 		this.subject = subject;
 		this.callbackHandler = callbackHandler;
 		this.sharedState = sharedState;
 		this.options = options;
 	}
 
-	@Override
 	public boolean login() throws LoginException {
 		
 		if (callbackHandler == null) {
@@ -49,9 +50,12 @@ public class JAASLoginModule implements LoginModule {
 			
 			System.out.println("Username: " + username + " Password: " + password.toString());
 			
+			throw new LoginException("Erro acontecendo no meu LoginModule");
+			
 		} catch (java.io.IOException ioe) {
+			
 			throw new LoginException(ioe.toString());
-
+			
 		} catch (UnsupportedCallbackException uce) {
 			throw new LoginException("Error: " + uce.getCallback().toString()
 					+ " not available to garner authentication information "
@@ -59,26 +63,22 @@ public class JAASLoginModule implements LoginModule {
 
 		} catch (Exception e) {
 			throw new LoginException(e.getMessage());
-		}
-		
-		return false;
+}
+		//return false;
 	}
 
-	@Override
 	public boolean commit() throws LoginException {
-		// TODO Auto-generated method stub
+		System.out.println("commit()");
 		return false;
 	}
 
-	@Override
 	public boolean abort() throws LoginException {
-		// TODO Auto-generated method stub
+		System.out.println("abort()");
 		return false;
 	}
 
-	@Override
 	public boolean logout() throws LoginException {
-		// TODO Auto-generated method stub
+		System.out.println("logout()");
 		return false;
 	}
 
