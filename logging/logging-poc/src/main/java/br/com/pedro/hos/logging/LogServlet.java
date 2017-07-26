@@ -17,8 +17,8 @@ public class LogServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
-	//Logger log = Logger.getLogger(getClass().getName());
-	
+	org.jboss.logging.Logger logTest = org.jboss.logging.Logger.getLogger(getClass());
+		
 	Logger log = LoggerFactory.getLogger(getClass());
 
 	static String PAGE_HEADER = "<html><head><title>helloworld</title></head><body>";
@@ -28,8 +28,24 @@ public class LogServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		log.info("###### Logging no Servlet #######");
-		log.error("SEVERE ERROR no Servlet");
+		log.info("org.slf4j.Logger ###### INFO #######");
+		log.error("org.slf4j.Logger ###### ERROR ######");
+		log.debug("org.slf4j.Logger ###### DEBUG ######");
+		
+		logTest.debug("org.jboss.logging.Logger ###### DEBUG #######");
+		logTest.error("org.jboss.logging.Logger ###### ERROR ######");
+		logTest.info("org.jboss.logging.Logger ###### INFO ######");
+		
+		try {
+			
+			String a = null;
+			a.concat("a");
+			
+			System.out.println(a);
+			
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
 		
 		resp.setContentType("text/html");
 		PrintWriter writer = resp.getWriter();
