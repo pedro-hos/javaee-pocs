@@ -1,21 +1,20 @@
 package br.com.pedrohos.slsb;
 
+import java.util.logging.Logger;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
-import javax.ejb.Startup;
 import javax.ejb.Timeout;
 import javax.ejb.TimerConfig;
 import javax.ejb.TimerService;
 
-import org.jboss.logging.Logger;
-
 @Singleton
-@Startup
+//@Startup
 public class SimpleBean {
 
-	private static final Logger log = Logger.getLogger(SimpleBean.class);
+	private static final Logger log = Logger.getLogger(SimpleBean.class.getName());
 
 	@Resource
 	private TimerService timerService;
@@ -34,14 +33,14 @@ public class SimpleBean {
 
 	// @Timeout
 	public void showRunning() {
-		log.infof("Timer is active @%s", getJBossNodeName());
+		log.info("Timer is active " + getJBossNodeName());
 		aBean.doSomething();
 	}
 
 	@Timeout
 	public void showRunning2() {
 
-		log.infof("Timer is active @%s", getJBossNodeName());
+		log.info("Timer is active " + getJBossNodeName());
 
 		for (int i = 0; i < 20; i++) {
 			log.info("count " + i);
@@ -50,7 +49,7 @@ public class SimpleBean {
 	}
 
 	public void invoke(String text) {
-		log.infof("Bean invocation @%s: %s", getJBossNodeName(), text);
+		log.info("Bean invocation " + getJBossNodeName() + " " + text);
 	}
 
 }

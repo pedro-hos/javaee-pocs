@@ -2,6 +2,7 @@ package br.com.pedrohos.remote.stateful;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.PostActivate;
@@ -9,8 +10,6 @@ import javax.ejb.PrePassivate;
 import javax.ejb.Remote;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
-
-import org.jboss.logging.Logger;
 
 /**
  * @author pedro-hos
@@ -20,7 +19,8 @@ import org.jboss.logging.Logger;
 @Remote(ShoppingCart.class)
 public class ShoppingCartBean implements ShoppingCart {
 
-	private final Logger logger = Logger.getLogger(getClass());
+	Logger logger = Logger.getLogger(this.getClass().getName());
+
 	private Collection<String> items = null;
 	
 	@Override

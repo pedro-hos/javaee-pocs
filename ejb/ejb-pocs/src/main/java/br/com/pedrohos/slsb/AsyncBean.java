@@ -1,16 +1,16 @@
 package br.com.pedrohos.slsb;
 
+import java.util.logging.Logger;
+
 import javax.ejb.Asynchronous;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-
-import org.jboss.logging.Logger;
 
 @Stateless
 @LocalBean
 public class AsyncBean {
 	
-	private static final Logger log = Logger.getLogger(AsyncBean.class);
+	Logger log = Logger.getLogger(this.getClass().getName());
 	
     @Asynchronous
     public void doSomething(){

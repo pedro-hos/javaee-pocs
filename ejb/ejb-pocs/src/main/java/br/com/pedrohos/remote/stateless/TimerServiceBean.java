@@ -2,6 +2,7 @@ package br.com.pedrohos.remote.stateless;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -9,8 +10,6 @@ import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
-
-import org.jboss.logging.Logger;
 
 import br.com.pedrohos.local.stateless.NiceDayService;
 
@@ -22,7 +21,7 @@ import br.com.pedrohos.local.stateless.NiceDayService;
 @Stateless
 public class TimerServiceBean implements TimerService {
 	
-	private final Logger logger = Logger.getLogger(TimerServiceBean.class);
+	private final Logger logger = Logger.getLogger(TimerServiceBean.class.getName());
 	
 	@EJB
 	private NiceDayService niceDay;
