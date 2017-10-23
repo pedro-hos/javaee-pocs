@@ -18,10 +18,6 @@ public class Email implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Resource for sending the email. The mail subsystem is defined in either
-	 * standalone.xml or domain.xml in your respective configuration directory.
-	 */
 	@Resource(mappedName = "java:jboss/mail/OutroMail")
 	private Session mySession;
 
