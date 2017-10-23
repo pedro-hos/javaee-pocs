@@ -18,7 +18,7 @@ import javax.ejb.TimerService;
 import br.com.pedrohos.timer.WorkerBean;
 
 @Singleton
-@Startup
+//@Startup
 public class SingletonWithTimeout {
 	
 	Logger logger = Logger.getLogger(this.getClass().getName());

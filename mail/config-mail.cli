@@ -1,0 +1,19 @@
+# Batch script to configure the custom MyOtherMail mail session
+
+# Start batching commands
+batch
+
+# Create the custom MyOtherMail mail session
+/subsystem=mail/mail-session=OutroMail:add(jndi-name=java:jboss/mail/OutroMail)
+
+# Configure the custom SMTP
+/socket-binding-group=standard-sockets/remote-destination-outbound-socket-binding=meu-smtp-binding:add(host=localhost,port=2525)
+
+# Add the custom socket binding groups to the custom MyOtherMail mail session
+/subsystem=mail/mail-session=OutroMail/server=smtp:add(outbound-socket-binding-ref=meu-smtp-binding)
+
+# Run the batch commands
+run-batch
+
+# Reload the server configuration
+reload
