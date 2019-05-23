@@ -7,13 +7,13 @@ import javax.validation.constraints.Size;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
-@Entity(name = "agenda")
+@Entity(name = "contact")
 public class Contact extends PanacheEntity {
 
 	@NotNull
 	@Size(min = 3, max = 100)
     @Column(nullable = false)
-	public String nome;
+	public String name;
 	
 	public String email;
 	
