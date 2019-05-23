@@ -1,6 +1,7 @@
 package com.jugvale.rest;
 
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.util.List;
 import java.util.Objects;
 
@@ -58,17 +59,21 @@ public class AgendaResource {
 	@Transactional
 	public Response newContact(final Contact contact) {
 		contactRepository.persist(contact);
-		return Response.ok(contact).build();
+		return Response.created(URI.create("http://localhost:8080/encontro/" + contact.id)).build();
 	}
 	
 	@PUT
-	@Transactional
 	@Path("/{id}")
+	@Transactional
 	public Response editContact(final Contact contact, @PathParam("id") final long id) {
 		
-		if(Objects.isNull(contactRepository.findById(id))) {
+		Contact old = contactRepository.findById(id);
+		
+		if(Objects.isNull(old)) {
             throw new WebApplicationException("No contacts available", HttpURLConnection.HTTP_NOT_FOUND);
 		}
+		
+		contactRepository.delete(old);
 		
 		contact.id = id;
 		contactRepository.persist(contact);
@@ -79,7 +84,7 @@ public class AgendaResource {
 	@DELETE
 	@Transactional
 	@Path("/{id}")
-	public Response editContact(@PathParam("id") final long id) {
+	public Response deleteContact(@PathParam("id") final long id) {
 		
 		Contact contact = contactRepository.findById(id);
 		
