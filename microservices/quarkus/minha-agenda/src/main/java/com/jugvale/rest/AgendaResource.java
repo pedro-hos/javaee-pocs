@@ -63,21 +63,14 @@ public class AgendaResource {
 	}
 	
 	@PUT
-	@Path("/{id}")
 	@Transactional
-	public Response editContact(final Contact contact, @PathParam("id") final long id) {
+	public Response editContact(final Contact contact) {
 		
-		Contact old = contactRepository.findById(id);
-		
-		if(Objects.isNull(old)) {
+		if(Objects.isNull(contact.id)) {
             throw new WebApplicationException("No contacts available", HttpURLConnection.HTTP_NOT_FOUND);
 		}
 		
-		contactRepository.delete(old);
-		
-		contact.id = id;
 		contactRepository.persist(contact);
-		
 		return Response.ok(contact).build();
 	}
 	
