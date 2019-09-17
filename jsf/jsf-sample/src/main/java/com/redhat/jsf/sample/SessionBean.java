@@ -12,8 +12,9 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
-@SessionScoped
 @ManagedBean
+@SessionScoped
+@SuppressWarnings("deprecation")
 public class SessionBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 @ViewScoped
 @ManagedBean
+@SuppressWarnings("deprecation")
 public class Bean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
