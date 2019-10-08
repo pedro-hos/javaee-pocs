@@ -1,7 +1,5 @@
 package com.redhat.resources;
 
-import java.util.Optional;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -16,7 +14,7 @@ import com.redhat.model.Message;
 public class ExampleResource {
 	
 	@ConfigProperty(defaultValue = "Hello World", name = "hello.message")
-	Optional<String> message;
+	String message;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
