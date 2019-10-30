@@ -1,0 +1,5 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1568764543314,4,HTTP Request,200,OK,Thread Group 1-1,text,true,,355,137,1,1,http://localhost:8080/jsf-sample/home.jsf,4,0,1
+1568764543318,5,HTTP Request,200,OK,Thread Group 1-1,text,true,,318,137,1,1,http://localhost:8080/jsf-sample/bean.jsf,5,0,0
+1568764548319,9,HTTP Request,200,OK,Thread Group 1-2,text,true,,355,137,1,1,http://localhost:8080/jsf-sample/home.jsf,9,0,1
+1568764548329,9,HTTP Request,200,OK,Thread Group 1-2,text,true,,318,137,1,1,http://localhost:8080/jsf-sample/bean.jsf,8,0,0
