@@ -19,7 +19,7 @@ public class FaultToleranceResource {
 	
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
-	@Retry(maxRetries = 0)
+	@Retry(maxRetries = 4)
 	@Path("/retry")
 	public String testFaultRetry() {
 		long andIncrement = counter.getAndIncrement();
