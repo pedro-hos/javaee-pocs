@@ -8,7 +8,7 @@ import javax.jws.WebService;
 @WebService(targetNamespace = "http://www.jboss.org/eap/quickstarts/wshelloworld/HelloWorld")
 public interface HelloWorldService {
 
-	@WebMethod
+	@WebMethod(operationName = "sayHello", action = "Should say hello", exclude = false)
 	String sayHello();
 	
 	@WebMethod

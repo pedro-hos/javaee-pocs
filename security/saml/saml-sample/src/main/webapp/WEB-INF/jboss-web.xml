@@ -1,0 +1,4 @@
+<jboss-web>
+  <security-domain>idp</security-domain>
+  <context-root>identity</context-root>
+</jboss-web>

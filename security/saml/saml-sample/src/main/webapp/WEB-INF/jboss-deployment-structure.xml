@@ -1,0 +1,7 @@
+<jboss-deployment-structure>
+  <deployment>
+    <dependencies>
+      <module name="org.picketlink" services="import"/>
+    </dependencies>
+  </deployment>
+</jboss-deployment-structure>
