@@ -1,5 +1,6 @@
 package com.redhat;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import javax.jws.WebMethod;
@@ -8,7 +9,7 @@ import javax.jws.WebService;
 @WebService(targetNamespace = "http://www.jboss.org/eap/quickstarts/wshelloworld/HelloWorld")
 public interface HelloWorldService {
 
-	@WebMethod(operationName = "sayHello", action = "Should say hello", exclude = false)
+	@WebMethod
 	String sayHello();
 	
 	@WebMethod
@@ -19,5 +20,8 @@ public interface HelloWorldService {
 
 	@WebMethod
 	String sayHelloToNames(List<String> names);
+	
+	@WebMethod
+	List<BigInteger> getBigInteger();
 
 }

@@ -15,14 +15,20 @@
 		<version.wildfly.maven.plugin>1.0.2.Final</version.wildfly.maven.plugin>
 		<version.surefire.plugin>2.10</version.surefire.plugin>
 		<version.war.plugin>2.1.1</version.war.plugin>
-		<version.server.bom>7.2.0.GA</version.server.bom>
+		<version.server.bom>7.3.0.GA</version.server.bom>
+		<maven.repository.protocol>https</maven.repository.protocol>
+		<maven.repository.url>${maven.repository.protocol}://repository.jboss.org/nexus/content/groups/public/</maven.repository.url>
+		<!-- https://access.redhat.com/maven-repository -->
+		<maven.redhat.repository.url>${maven.repository.protocol}://maven.repository.redhat.com/ga/</maven.redhat.repository.url>
+		<maven.repository.product.url>${maven.repository.protocol}://download.devel.redhat.com/brewroot/repos/jb-eap-7.3-maven-build/latest/maven/</maven.repository.product.url>
+
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>org.jboss.bom</groupId>
-				<artifactId>jboss-eap-javaee8-with-tools</artifactId>
+				<artifactId>jboss-eap-jakartaee8-with-tools</artifactId>
 				<version>${version.server.bom}</version>
 				<type>pom</type>
 				<scope>import</scope>
@@ -35,10 +41,41 @@
 		</dependencies>
 	</dependencyManagement>
 
+	<repositories>
+		<repository>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</snapshots>
+			<id>jboss-public-repository-group</id>
+			<name>JBoss Public Repository Group</name>
+			<url>${maven.repository.url}</url>
+			<layout>default</layout>
+		</repository>
+		<repository>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</snapshots>
+			<id>jboss-enterprise-maven-repository</id>
+			<name>JBoss Enterprise Maven Repository</name>
+			<url>${maven.redhat.repository.url}</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
+
 	<dependencies>
 		<dependency>
-			<groupId>javax.enterprise</groupId>
-			<artifactId>cdi-api</artifactId>
+			<groupId>jakarta.enterprise</groupId>
+			<artifactId>jakarta.enterprise.cdi-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -53,7 +90,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.spec.javax.transaction</groupId>
-			<artifactId>jboss-transaction-api_1.2_spec</artifactId>
+			<artifactId>jboss-transaction-api_1.3_spec</artifactId>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -65,6 +102,11 @@
 			<groupId>javax.jws</groupId>
 			<artifactId>jsr181-api</artifactId>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.spec.javax.xml.ws</groupId>

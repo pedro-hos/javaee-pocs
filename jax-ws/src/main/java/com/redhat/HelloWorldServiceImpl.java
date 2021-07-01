@@ -1,5 +1,6 @@
 package com.redhat;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,5 +60,11 @@ public class HelloWorldServiceImpl implements HelloWorldService {
 		} catch (Exception e) {
 			throw new Exception(e.getCause());
 		}
+	}
+
+	@Override
+	public List<BigInteger> getBigInteger() {
+		PartnerstammdatenXmlDaten p = new PartnerstammdatenXmlDaten();
+		return p.getFormularBerufskategorien();
 	}
 }
