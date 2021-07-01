@@ -64,7 +64,7 @@ public class HelloWorldServiceImpl implements HelloWorldService {
 
 	@Override
 	public List<BigInteger> getBigInteger() {
-		PartnerstammdatenXmlDaten p = new PartnerstammdatenXmlDaten();
-		return p.getFormularBerufskategorien();
+		MyData p = new MyData();
+		return p.getBigIntegerList();
 	}
 }
