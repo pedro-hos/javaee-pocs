@@ -1,0 +1,26 @@
+# Batch script to configure LDAP Elytron in the WildFly server
+
+# Start batching commands
+batch
+
+# Create the directory context.
+/subsystem=elytron/dir-context=ldap-dir-context:add(url="ldap://127.0.0.1:10389",principal="uid=admin,ou=system",credential-reference={clear-text="secret"}, referral-mode=follow)
+
+# Create an LDAP realm and security domain.
+/subsystem=elytron/ldap-realm=ldap-realm:add(dir-context=ldap-dir-context,direct-verification="true", identity-mapping={rdn-identifier="uid", search-base-dn="ou=People,dc=keycloak,dc=org", use-recursive-search=false})
+
+/subsystem=elytron/simple-role-decoder=from-roles-attribute:add(attribute=Roles)
+
+/subsystem=elytron/security-domain=ldap-security-domain:add(realms=[{realm=ldap-realm,role-decoder=from-roles-attribute}],default-realm=ldap-realm,permission-mapper=default-permission-mapper)
+
+# Create an http-authentication-factory and enable BASIC & FORM mechanism.
+/subsystem=elytron/http-authentication-factory=ldap-http-auth:add(http-server-mechanism-factory=global,security-domain=ldap-security-domain,mechanism-configurations=[{mechanism-name=BASIC,mechanism-realm-configurations=[{realm-name=ldap-realm}]}])
+
+# Configure an application-security-domain in the undertow subsystem
+/subsystem=undertow/application-security-domain=ldap-application-domain:add(security-domain=ldap-security-domain)
+
+# Run the batch commands
+run-batch
+
+# Reload the server configuration
+reload
