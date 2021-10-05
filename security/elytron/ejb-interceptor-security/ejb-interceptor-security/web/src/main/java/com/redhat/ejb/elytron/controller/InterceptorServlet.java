@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.security.Principal;
 import java.util.Hashtable;
 
-import javax.ejb.EJB;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -23,7 +22,7 @@ import com.redhat.ejb.elytron.GreeterEJB;
  */
 
 @WebServlet("/test-interceptor")
-public class InterceptorTestServlet extends HttpServlet {
+public class InterceptorServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 8542428529747293268L;
 

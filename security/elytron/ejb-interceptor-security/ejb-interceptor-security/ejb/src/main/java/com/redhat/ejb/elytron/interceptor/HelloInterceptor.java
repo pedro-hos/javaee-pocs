@@ -2,12 +2,8 @@ package com.redhat.ejb.elytron.interceptor;
 
 import java.time.LocalDateTime;
 
-import javax.annotation.Resource;
-import javax.ejb.SessionContext;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
-
-import org.wildfly.security.auth.server.SecurityDomain;
 
 /**
  * @author Pedro Silva <pesilva@redhat.com>
@@ -15,8 +11,6 @@ import org.wildfly.security.auth.server.SecurityDomain;
  */
 public class HelloInterceptor {
 	
-	@Resource
-    private SessionContext ctx;
 	
 	
 	@AroundInvoke
@@ -24,13 +18,9 @@ public class HelloInterceptor {
 
 		Object[] parameters = context.getParameters();
 		String param = (String) parameters[0];
-		param = param + " [Intercepted at: " + LocalDateTime.now() + " ]";
+		param = "Hello " + param.toUpperCase() + " [Intercepted at: " + LocalDateTime.now() + " ]";
 		parameters[0] = param;
 		context.setParameters(parameters);
-		
-		System.out.println("[HelloInterceptor] " + ctx.getCallerPrincipal().getName());
-		
-		System.out.println("[HelloInterceptor] " + SecurityDomain.getCurrent().getCurrentSecurityIdentity());
 		
 		try {
 			return context.proceed();
