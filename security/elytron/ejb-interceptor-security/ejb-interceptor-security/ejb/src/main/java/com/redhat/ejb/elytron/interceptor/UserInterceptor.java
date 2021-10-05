@@ -19,8 +19,8 @@ public class UserInterceptor {
 	@AroundInvoke
 	public Object intercept(InvocationContext context) throws Exception {
 
-		System.out.println("[UserInterceptor] " + ctx.getCallerPrincipal().getName());
-		System.out.println("[UserInterceptor] " + SecurityDomain.getCurrent().getCurrentSecurityIdentity());
+		System.out.println("[UserInterceptor] SessionContext Info: " + ctx.getCallerPrincipal().getName());
+		System.out.println("[UserInterceptor] SecurityDomain Info: " + SecurityDomain.getCurrent().getCurrentSecurityIdentity());
 
 		return context.proceed();
 	}

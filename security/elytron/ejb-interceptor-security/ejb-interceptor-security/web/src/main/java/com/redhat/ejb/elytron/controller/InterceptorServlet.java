@@ -26,7 +26,7 @@ public class InterceptorServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 8542428529747293268L;
 
-	static String PAGE_HEADER = "<html><head><title>Public Page</title></head><body>";
+	static String PAGE_HEADER = "<html><head><title>Interceptor Page</title></head><body>";
 	static String PAGE_FOOTER = "</body></html>";
 
 	//@EJB
@@ -36,17 +36,20 @@ public class InterceptorServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		PrintWriter writer = resp.getWriter();
+		
 		Principal principal = null;
 		String authType = null;
 		String remoteUser = null;
 
 		// Get security principal
 		principal = req.getUserPrincipal();
+		
 		// Get user name from login principal
 		remoteUser = req.getRemoteUser();
+		
 		// Get authentication type
 		authType = req.getAuthType();
-
+		
 		writer.println(PAGE_HEADER);
 		writer.println("<h1>" + "Successfully called Secured Servlet " + "</h1>");
 		writer.println("<p>" + "Principal  : " + principal.getName() + "</p>");
@@ -69,10 +72,8 @@ public class InterceptorServlet extends HttpServlet {
 		jndiProperties.put(Context.SECURITY_PRINCIPAL, "quickstartUser");
 		jndiProperties.put(Context.SECURITY_CREDENTIALS, "quickstartPwd1!");
 
-		Context context;
-
 		try {
-			context = new InitialContext(jndiProperties);
+			Context context = new InitialContext(jndiProperties);
 			greeterEJB = (GreeterEJB) context.lookup(
 					"java:global/ejb-interceptor-security/ejb-in-ear-ejb/GreeterEJB!" + GreeterEJB.class.getName());
 			return greeterEJB.sayHello(name);

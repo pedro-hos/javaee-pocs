@@ -38,7 +38,7 @@ public class GreeterEJB {
 
 	@Interceptors({ HelloInterceptor.class, UserInterceptor.class })
     public String sayHello(String name) {
-		System.out.println("[GreeterEJB] " + ctx.getCallerPrincipal().getName());
+		System.out.println("[GreeterEJB] SessionContext Info: " + ctx.getCallerPrincipal().getName());
         return name;
     }
 }

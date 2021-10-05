@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns="http://java.sun.com/xml/ns/javaee"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+      http://java.sun.com/xml/ns/javaee/ejb-jar_3_0.xsd"
+     version="3.0">
+    <assembly-descriptor>
+        <method-permission>
+            <description>EJB permitions</description>
+            <role-name>guest</role-name>
+            <method>
+                <ejb-name>GreeterEJB</ejb-name>
+                <method-name>sayHello</method-name>
+            </method>
+        </method-permission>
+    </assembly-descriptor>
+</ejb-jar>
