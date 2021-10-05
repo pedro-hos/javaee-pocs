@@ -16,28 +16,39 @@
  */
 package com.redhat.ejb.elytron;
 
-import javax.ejb.Stateful;
+import java.security.Principal;
+
+import javax.annotation.Resource;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
+import javax.ejb.SessionContext;
+import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
+
+import org.jboss.ejb3.annotation.SecurityDomain;
 
 import com.redhat.ejb.elytron.interceptor.HelloInterceptor;
 
-/**
- * A simple Hello World EJB. The EJB does not use an interface.
- *
- * @author paul.robinson@redhat.com, 2011-12-21
- */
-@Stateful
+@Stateless
+@PermitAll
+//@RolesAllowed({ "guest" })
+@SecurityDomain("other")
 public class GreeterEJB {
-    /**
-     * This method takes a name and returns a personalised greeting.
-     *
-     * @param name
-     *            the name of the person to be greeted
-     * @return the personalised greeting.
-     */
+	
+	// Inject the Session Context
+    @Resource
+    private SessionContext ctx;
+
+    private String getSecurityInfo() {
+        // Session context injected using the resource annotation
+        Principal principal = ctx.getCallerPrincipal();
+        return principal.toString();
+    }
 	
 	@Interceptors(HelloInterceptor.class)
     public String sayHello(String name) {
+		
+		System.out.println("---> " + getSecurityInfo());
         return "Hello " + name;
     }
 }

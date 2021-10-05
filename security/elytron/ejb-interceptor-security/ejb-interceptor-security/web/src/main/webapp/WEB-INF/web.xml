@@ -4,23 +4,22 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 
-<!--
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>secure</web-resource-name>
-			<url-pattern>/private/*</url-pattern>
+			<url-pattern>/test-interceptor</url-pattern>
 		</web-resource-collection>
 		<auth-constraint>
-			<role-name>*</role-name>
+			<role-name>guest</role-name>
 		</auth-constraint>
 	</security-constraint>
 	<security-role>
 		<description>The role that is required to log in to /secure/*</description>
-		<role-name>*</role-name>
+		<role-name>guest</role-name>
 	</security-role>
 	<login-config>
 		<auth-method>BASIC</auth-method>
-		<realm-name>ldap-application-domain</realm-name>
+		<realm-name>other</realm-name>
 	</login-config>
-	-->
+	
 </web-app>

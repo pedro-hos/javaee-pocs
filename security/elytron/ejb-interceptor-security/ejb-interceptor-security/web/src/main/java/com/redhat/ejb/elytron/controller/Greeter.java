@@ -16,13 +16,19 @@
  */
 package com.redhat.ejb.elytron.controller;
 
-import javax.ejb.EJB;
+import java.io.Serializable;
+import java.util.Hashtable;
+
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+import org.jboss.ejb3.annotation.SecurityDomain;
 
 import com.redhat.ejb.elytron.GreeterEJB;
-
-import java.io.Serializable;
 
 /**
  * A simple managed bean that is used to invoke the GreeterEJB and store the
@@ -32,15 +38,18 @@ import java.io.Serializable;
  */
 @Named("greeter")
 @SessionScoped
+@RolesAllowed({ "guest" })
+@SecurityDomain("other")
 public class Greeter implements Serializable {
 
-    /** Default value included to remove warning. **/
+    /** Default value included to remove warning. *	*/
     private static final long serialVersionUID = 1L;
+    
 
     /**
      * Injected GreeterEJB client
      */
-    @EJB
+    //@EJB
     private GreeterEJB greeterEJB;
 
     /**
@@ -55,6 +64,23 @@ public class Greeter implements Serializable {
      */
     
     public void setName(String name) {
+    	
+    	final Hashtable<String, String> jndiProperties = new Hashtable<>();
+    	jndiProperties.put(Context.SECURITY_PRINCIPAL, "quickstartUser");
+    	jndiProperties.put(Context.SECURITY_CREDENTIALS, "quickstartPwd1!");
+    	
+        Context context;
+        
+		try {
+			context = new InitialContext(jndiProperties);
+			greeterEJB = (GreeterEJB) context.lookup("java:global/ejb-interceptor-security/ejb-in-ear-ejb/GreeterEJB!" + GreeterEJB.class.getName());
+			
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+        
         message = greeterEJB.sayHello(name);
     }
 
