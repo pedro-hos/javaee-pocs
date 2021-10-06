@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.security.Principal;
 import java.util.Hashtable;
 
+import javax.annotation.security.RunAs;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -21,6 +22,7 @@ import com.redhat.ejb.elytron.GreeterEJB;
  *
  */
 
+@RunAs("guest")
 @WebServlet("/test-interceptor")
 public class InterceptorServlet extends HttpServlet {
 
@@ -69,13 +71,17 @@ public class InterceptorServlet extends HttpServlet {
 	private String getEJB(String name) {
 
 		final Hashtable<String, String> jndiProperties = new Hashtable<>();
+		
+		jndiProperties.put(Context.INITIAL_CONTEXT_FACTORY,  "org.wildfly.naming.client.WildFlyInitialContextFactory");
+		jndiProperties.put(Context.PROVIDER_URL, String.format("%s://%s:%d", "remote+http", "localhost", 8080));
+		   
 		jndiProperties.put(Context.SECURITY_PRINCIPAL, "quickstartUser");
 		jndiProperties.put(Context.SECURITY_CREDENTIALS, "quickstartPwd1!");
 
 		try {
 			Context context = new InitialContext(jndiProperties);
-			greeterEJB = (GreeterEJB) context.lookup(
-					"java:global/ejb-interceptor-security/ejb-in-ear-ejb/GreeterEJB!" + GreeterEJB.class.getName());
+			//greeterEJB = (GreeterEJBImpl) context.lookup("java:global/ejb-interceptor-security/ejb-in-ear-ejb/GreeterEJBImpl!" + GreeterEJBImpl.class.getName());
+			greeterEJB = (GreeterEJB) context.lookup("ejb:ejb-interceptor-security/ejb-in-ear-ejb/GreeterEJBImpl!" + GreeterEJB.class.getName());
 			return greeterEJB.sayHello(name);
 		} catch (NamingException e) {
 			e.printStackTrace();
