@@ -11,8 +11,6 @@ import javax.interceptor.InvocationContext;
  */
 public class HelloInterceptor {
 	
-	
-	
 	@AroundInvoke
 	public Object intercept(InvocationContext context) throws Exception {
 

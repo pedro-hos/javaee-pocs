@@ -40,6 +40,7 @@ public class GreeterEJBImpl implements GreeterEJB {
 	@Interceptors({ HelloInterceptor.class, UserInterceptor.class })
     public String sayHello(String name) {
 		System.out.println("[GreeterEJBImpl] SessionContext Info: " + ctx.getCallerPrincipal().getName());
+		System.out.println("[GreeterEJBImpl] isCallerInRole('guest')? " + ctx.isCallerInRole("guest"));
         return name;
     }
 }

@@ -5,7 +5,8 @@ import java.io.PrintWriter;
 import java.security.Principal;
 import java.util.Hashtable;
 
-import javax.annotation.security.RunAs;
+import javax.annotation.Resource;
+import javax.ejb.SessionContext;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -22,7 +23,7 @@ import com.redhat.ejb.elytron.GreeterEJB;
  *
  */
 
-@RunAs("guest")
+//@RunAsPrincipal("quickstartUser")
 @WebServlet("/test-interceptor")
 public class InterceptorServlet extends HttpServlet {
 
@@ -30,7 +31,7 @@ public class InterceptorServlet extends HttpServlet {
 
 	static String PAGE_HEADER = "<html><head><title>Interceptor Page</title></head><body>";
 	static String PAGE_FOOTER = "</body></html>";
-
+	
 	//@EJB
 	private GreeterEJB greeterEJB;
 
