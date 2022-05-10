@@ -4,7 +4,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 
-	<security-constraint>
+	<!-- <security-constraint>
 		<web-resource-collection>
 			<web-resource-name>secure</web-resource-name>
 			<url-pattern>/private/*</url-pattern>
@@ -19,6 +19,7 @@
 	</security-role>
 	<login-config>
 		<auth-method>BASIC</auth-method>
-		<realm-name>ldap-application-domain</realm-name>
-	</login-config>
+		<realm-name>other</realm-name>
+	</login-config> -->
+	
 </web-app>

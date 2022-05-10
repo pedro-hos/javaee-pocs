@@ -1,23 +1,14 @@
-package com.redhat.ldap.elytron;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+package com.redhat.ldap.elytron.servlet;
 
 /**
  * @author Pedro Silva <pesilva@redhat.com>
  *
  */
 
-@WebServlet("/private")
-public class PrivateServlet extends HttpServlet {
+//@WebServlet("/private")
+public class PrivateServlet /*extends HttpServlet*/ {
 
-	private static final long serialVersionUID = 8542428529747293268L;
+	/*private static final long serialVersionUID = 8542428529747293268L;
 	
 	static String PAGE_HEADER = "<html><head><title>Private Page</title></head><body>";
     static String PAGE_FOOTER = "</body></html>";
@@ -39,5 +30,5 @@ public class PrivateServlet extends HttpServlet {
 		writer.println(PAGE_FOOTER);
 		writer.close();
 
-	}
+	}*/
 }

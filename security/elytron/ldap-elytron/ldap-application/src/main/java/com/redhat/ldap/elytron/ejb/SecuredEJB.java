@@ -1,4 +1,4 @@
-	package com.redhat.ejb.elytron;
+	package com.redhat.ldap.elytron.ejb;
 
 import java.security.Principal;
 
@@ -24,7 +24,7 @@ import org.jboss.ejb3.annotation.SecurityDomain;
  */
 @Stateless
 @Remote(SecuredEJBRemote.class)
-@RolesAllowed({ "guest" })
+@RolesAllowed({ "ldap-user" })
 @SecurityDomain("other")
 public class SecuredEJB implements SecuredEJBRemote {
 
@@ -41,7 +41,7 @@ public class SecuredEJB implements SecuredEJBRemote {
         return principal.toString();
     }
 
-    @RolesAllowed("admin")
+    @RolesAllowed("ldap-admin")
     public boolean administrativeMethod() {
         return true;
     }
