@@ -2,6 +2,7 @@ package com.redhat.ldap.elytron.ejb;
 
 import java.util.Properties;
 
+import javax.ejb.EJBAccessException;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -32,10 +33,7 @@ public class RemoteClient {
 
 		try {
 			hasAdminPermission = reference.administrativeMethod();
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		}
+		} catch (EJBAccessException e) { /*You can add some bussiness rule here*/}
 
 		System.out.println("\nPrincipal has admin permission: " + hasAdminPermission);
 		System.out.println("\n\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n\n\n");

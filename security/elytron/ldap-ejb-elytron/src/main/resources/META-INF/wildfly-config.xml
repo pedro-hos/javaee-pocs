@@ -5,8 +5,8 @@
         </authentication-rules>
         <authentication-configurations>
             <configuration name="default">
-                <!-- <set-user-name name="bwilson"/> -->
-                <set-user-name name="jbrown" />
+                <set-user-name name="bwilson"/>
+                <!--<set-user-name name="jbrown" />-->
                 <credentials>
                     <clear-password password="q1w2e3r4!"/>
                 </credentials>
