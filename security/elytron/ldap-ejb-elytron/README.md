@@ -5,13 +5,10 @@ This project have the following files:
 
 ~~~
 $ ls -al
-total 48
-drwxr-xr-x. 3 pesilva pesilva  4096 May 10 17:37 .
-drwxr-xr-x. 6 pesilva pesilva  4096 May 10 17:37 ..
--rw-r--r--. 1 pesilva pesilva  2267 May 10 17:25 configure.cli
--rwxrwxr-x. 1 pesilva pesilva  4967 May 10 17:34 pom.xml
-drwxrwxr-x. 3 pesilva pesilva  4096 May 10 17:31 src
--rw-rw-r--. 1 pesilva pesilva 21065 May 10 17:29 users.ldif
+configure.cli
+pom.xml
+src
+users.ldif
 ~~~
 
 * configure.cli: with the configuration necessary to connect and configure the EJB and LDAP for the LDAP configuration present on `users.ldif`. This file, contains the following content, and **you need to change the LDAP configuration to match to your LDAP configurations**:

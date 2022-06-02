@@ -1,0 +1,19 @@
+<configuration>
+    <authentication-client xmlns="urn:elytron:1.0">
+        <authentication-rules>
+            <rule use-configuration="default-config"/>
+        </authentication-rules>
+        <authentication-configurations>
+            <configuration name="default-config">
+                <set-user-name name="quickstartUser"/>
+                <credentials>
+                    <clear-password password="quickstartPwd1!"/>
+                </credentials>
+                <set-mechanism-realm name="LegacyRealm"/>
+                <providers>
+                    <use-service-loader />
+                </providers>
+            </configuration>
+        </authentication-configurations>
+    </authentication-client>
+</configuration>
