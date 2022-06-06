@@ -15,9 +15,8 @@ public class RemoteClient {
     public static void main(String[] args) throws Exception {
 
         final Hashtable<String, String> jndiProperties = new Hashtable<>();
-        // jndiProperties.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
         jndiProperties.put(Context.INITIAL_CONTEXT_FACTORY, "org.wildfly.naming.client.WildFlyInitialContextFactory");
-        jndiProperties.put(Context.PROVIDER_URL, "remote+http://localhost:8080");
+        jndiProperties.put(Context.PROVIDER_URL, "remote+http://localhost:8180,remote+http://localhost:8280,remote+http://localhost:8380,remote+http://localhost:8480,remote+http://localhost:8580");
         final Context context = new InitialContext(jndiProperties);
 
         SecuredEJBRemote reference = (SecuredEJBRemote) context.lookup("ejb:/ejb-security-jaas/SecuredEJB!" + SecuredEJBRemote.class.getName());
