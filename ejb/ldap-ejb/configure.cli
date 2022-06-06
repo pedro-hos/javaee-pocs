@@ -1,0 +1,36 @@
+# Batch script to configure LDAP Elytron in the EAP 7.4 to secure EJB server
+
+# Start batching commands
+batch
+
+# Create the directory context.
+/subsystem=elytron/dir-context=ldap-dir-context:add(url="ldap://127.0.0.1:10389",principal="uid=admin,ou=system",credential-reference={clear-text="secret"}, referral-mode=follow)
+
+# Create an LDAP realm and security domain.
+/subsystem=elytron/ldap-realm=ldap-realm:add(dir-context=ldap-dir-context,direct-verification="true", identity-mapping={rdn-identifier="uid", search-base-dn="ou=People,dc=keycloak,dc=org", user-password-mapper={from="userPassword"}, use-recursive-search=false, attribute-mapping=[{filter-base-dn="ou=Roles,dc=keycloak,dc=org",filter="(&(objectClass=groupOfNames)(member={1}))",from="cn",to="Roles"}]})
+
+# Add role decoder that decodes roles from the Roles attribute.
+/subsystem=elytron/simple-role-decoder=from-roles-attribute:add(attribute=Roles)
+
+
+# Add a security domain that uses the LDAP realm
+/subsystem=elytron/security-domain=ldap-security-domain:add(realms=[{realm=ldap-realm,role-decoder=from-roles-attribute}],default-realm=ldap-realm,permission-mapper=default-permission-mapper)
+
+# Create a sasl-authentication-factory for CLI and remoting-connectorand set the authentication mechanism to PLAIN
+/subsystem=elytron/configurable-sasl-server-factory=ldap-sasl-server-factory:add(sasl-server-factory=elytron)
+
+/subsystem=elytron/sasl-authentication-factory=ldap-application-sasl-authentication:add(mechanism-configurations=[{mechanism-name=PLAIN, mechanism-realm-configurations=[{realm-name=ldap-realm}]}],sasl-server-factory=ldap-sasl-server-factory,security-domain=ldap-security-domain)
+
+
+# Add security domain mapping in the EJB3 subsystem to enable elytron LDAP for the EJBs
+/subsystem=ejb3/application-security-domain=other:add(security-domain=ldap-security-domain)
+
+# Update the http-remoting-connector to use the sasl-authentication-factory created before
+/subsystem=remoting/http-connector=http-remoting-connector:write-attribute(name=sasl-authentication-factory,value=ldap-application-sasl-authentication)
+/subsystem=remoting/http-connector=http-remoting-connector:undefine-attribute(name=security-realm)
+
+# Run the batch commands
+run-batch
+
+# Reload the server configuration
+reload
