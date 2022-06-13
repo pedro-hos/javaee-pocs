@@ -19,11 +19,6 @@ public class AES256 {
 
     private static final String SECRET_KEY = "my_super_secret_key";
     private static final String SALT = "th3b3stS4ltP0ss1pl3";
-    
-    public static void main(String[] args) {
-        System.out.println(AES256.encrypt("storepassword"));
-        System.out.println(decrypt("R2sDgtkybxqlwf79ZX+qOQ=="));
-    }
 
     public static String encrypt(String strToEncrypt) {
         try {
