@@ -1,0 +1,2 @@
+org.eclipse.microprofile.config.spi.ConfigSource
+org.jboss.quarkus.filevault.KeyStoreConfigSource

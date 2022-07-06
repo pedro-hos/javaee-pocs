@@ -17,11 +17,7 @@ public class RemoteClient {
         final Hashtable<String, String> jndiProperties = new Hashtable<>();
         jndiProperties.put(Context.INITIAL_CONTEXT_FACTORY, "org.wildfly.naming.client.WildFlyInitialContextFactory");
         
-        String providerURL = "remote+http://localhost:8180,"
-                           + "remote+http://localhost:8280,"
-                           + "remote+http://localhost:8380,"
-                           + "remote+http://localhost:8480,"
-                           + "remote+http://localhost:8580";
+            String providerURL =  
         
         jndiProperties.put(Context.PROVIDER_URL, providerURL);
         final Context context = new InitialContext(jndiProperties);
