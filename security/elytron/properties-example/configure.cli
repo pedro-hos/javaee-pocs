@@ -1,0 +1,7 @@
+/subsystem=elytron/properties-realm=application-properties:add(groups-attribute=groups,groups-properties={path=roles.properties,relative-to=jboss.server.config.dir},users-properties={path=users.properties,relative-to=jboss.server.config.dir,plain-text=true})
+
+/subsystem=elytron/security-domain=application-security:add(realms=[{realm=application-properties,role-decoder=groups-to-roles},{realm=local}],default-realm=application-properties,permission-mapper=default-permission-mapper)
+
+/subsystem=elytron/http-authentication-factory=application-security-http:add(http-server-mechanism-factory=global, security-domain=application-security, mechanism-configurations=[{mechanism-name=FORM}])
+
+/subsystem=undertow/application-security-domain=application-security:add(http-authentication-factory=application-security-http)
