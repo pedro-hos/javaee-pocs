@@ -6,20 +6,21 @@ import java.security.Security;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.wildfly.security.WildFlyElytronProvider;
 import org.wildfly.security.auth.server.IdentityCredentials;
 import org.wildfly.security.credential.PasswordCredential;
 import org.wildfly.security.credential.store.CredentialStore;
-import org.wildfly.security.credential.store.CredentialStoreException;
-import org.wildfly.security.credential.store.WildFlyElytronCredentialStoreProvider;
 import org.wildfly.security.credential.store.CredentialStore.CredentialSourceProtectionParameter;
 import org.wildfly.security.credential.store.CredentialStore.ProtectionParameter;
+import org.wildfly.security.credential.store.CredentialStoreException;
 import org.wildfly.security.password.Password;
 import org.wildfly.security.password.WildFlyElytronPasswordProvider;
 import org.wildfly.security.password.interfaces.ClearPassword;
 
 public class RetrieveCredentialStore {
 	
-	private static final Provider CREDENTIAL_STORE_PROVIDER = new WildFlyElytronCredentialStoreProvider();
+	//private static final Provider CREDENTIAL_STORE_PROVIDER = new WildFlyElytronCredentialStoreProvider();
+	private static final Provider CREDENTIAL_STORE_PROVIDER = new WildFlyElytronProvider();
 	private static final Provider PASSWORD_PROVIDER = new WildFlyElytronPasswordProvider();
 	
 	static {
@@ -47,6 +48,9 @@ public class RetrieveCredentialStore {
 	}
 	
 	public static void retrieveValues(final String location, final String queriedAlias, final String keystorePass) throws NoSuchAlgorithmException, CredentialStoreException {
+		
+		System.out.println("Using: " + CREDENTIAL_STORE_PROVIDER.getName() + " Provider!\n");
+		
 		/*
          * Create a ProtectionParameter for access to the store.
          */
