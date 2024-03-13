@@ -15,7 +15,6 @@ public class GreetingResource {
 
 	@Inject
     Instance<ServiceName> serviceInstance;
-	
 	private ServiceName service;
 	
     @GET
