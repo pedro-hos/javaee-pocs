@@ -17,10 +17,13 @@
 		<version.war.plugin>2.1.1</version.war.plugin>
 		<version.server.bom>7.4.0.GA</version.server.bom>
 		<maven.repository.protocol>https</maven.repository.protocol>
-		<maven.repository.url>${maven.repository.protocol}://repository.jboss.org/nexus/content/groups/public/</maven.repository.url>
+		<maven.repository.url>
+			${maven.repository.protocol}://repository.jboss.org/nexus/content/groups/public/</maven.repository.url>
 		<!-- https://access.redhat.com/maven-repository -->
-		<maven.redhat.repository.url>${maven.repository.protocol}://maven.repository.redhat.com/ga/</maven.redhat.repository.url>
-		<maven.repository.product.url>${maven.repository.protocol}://download.devel.redhat.com/brewroot/repos/jb-eap-7.3-maven-build/latest/maven/</maven.repository.product.url>
+		<maven.redhat.repository.url>
+			${maven.repository.protocol}://maven.repository.redhat.com/ga/</maven.redhat.repository.url>
+		<maven.repository.product.url>
+			${maven.repository.protocol}://download.devel.redhat.com/brewroot/repos/jb-eap-7.3-maven-build/latest/maven/</maven.repository.product.url>
 
 	</properties>
 
@@ -74,12 +77,18 @@
 
 	<dependencies>
 
-		<!-- The EJB Client BOM provides application server-compatible dependency 
-			management, used for building, testing or debugging EJB client applications. 
-			Import the BOM to the dependency management section of the app's pom.xml 
-			file and then set dependencies on specific artifacts. Alternatively, as shown 
-			in the following example, set a single dependency on the BOM for the app 
-			to depend on all the artifacts it manages. -->
+		<!-- The EJB Client BOM provides application server-compatible
+		dependency 
+			management, used for building, testing or debugging EJB
+		client applications. 
+			Import the BOM to the dependency management
+		section of the app's pom.xml 
+			file and then set dependencies on
+		specific artifacts. Alternatively, as shown 
+			in the following
+		example, set a single dependency on the BOM for the app 
+			to depend on
+		all the artifacts it manages. -->
 		<dependency>
 			<groupId>org.jboss.eap</groupId>
 			<artifactId>wildfly-ejb-client-bom</artifactId>
@@ -105,11 +114,16 @@
 			<artifactId>jboss-servlet-api_4.0_spec</artifactId>
 			<scope>provided</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.wildfly.security</groupId>
+			<artifactId>wildfly-elytron</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
-		<!-- Set the name of the WAR, used as the context root when the app is 
-			deployed -->
+		<!-- Set the name of the WAR, used as the context root when the app is
+		deployed -->
 		<finalName>${project.artifactId}</finalName>
 		<plugins>
 
